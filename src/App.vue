@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="./assets/download.png">
 
     <div>
       <input type="text" v-model="search">
@@ -20,13 +20,20 @@ export default {
   name: 'App',
   data() {
     return {
-      search: 'ritorno',
+      search: 'ritorno al futuro',
       movies: []
     }
   },
   created() {
 
-    axios.get('https://api.themoviedb.org/3/search/movie?api_key=3c426907b15cb93c3c4d0a11f370a038&query=batman')
+    // axios.get(`https://api.themoviedb.org/3/search/movie?api_key=3c426907b15cb93c3c4d0a11f370a038&query=${ this.search }`)
+    axios.get(`https://api.themoviedb.org/3/search/movie`, {
+      params: {
+        api_key: '3c426907b15cb93c3c4d0a11f370a038',
+        query: this.search,
+        language: 'it-IT'
+      }
+    }) 
     .then( res => {
       console.log( res.data )
       this.movies = res.data.results
