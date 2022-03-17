@@ -4,6 +4,7 @@
 
     <div>
       <input type="text" v-model="search">
+      <button>Cerca</button>
     </div>
 
     <div v-for="movie in movies" :key="movie.id">
@@ -20,14 +21,17 @@ export default {
   name: 'App',
   data() {
     return {
-      search: 'ritorno al futuro',
-      movies: []
+      search: 'batman',
+      movies: [],
+      baseURL: 'https://api.themoviedb.org/3'
     }
   },
   created() {
 
     // axios.get(`https://api.themoviedb.org/3/search/movie?api_key=3c426907b15cb93c3c4d0a11f370a038&query=${ this.search }`)
-    axios.get(`https://api.themoviedb.org/3/search/movie`, {
+
+    // FILM
+    axios.get(`${ this.baseURL }/search/movie`, {
       params: {
         api_key: '3c426907b15cb93c3c4d0a11f370a038',
         query: this.search,
@@ -41,6 +45,15 @@ export default {
     .catch( error => {
     console.log( error.response )
     })
+
+  // SERIE TV
+    // axios.get(`${ this.baseURL }/search/tv`, {
+    //   params: {
+    //     api_key: '3c426907b15cb93c3c4d0a11f370a038',
+    //     query: this.search,
+    //     language: 'it-IT'
+    //   }
+    // })
 
   }
 }
