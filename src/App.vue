@@ -1,12 +1,32 @@
+// -----------------------------------------
+// HTML
+
 <template>
+
   <div id="app">
 
     <header>
       <input type="text" v-model="search" @keyup.enter="fetchData">
     </header>
 
+    <!-- ------------------------------- -->
+    <!-- CARD -->
+
     <div v-for="movie in movies" :key="movie.id">
+
+      <h3>
       {{ movie.title }}
+      </h3>
+      <p>
+        {{ movie.original_title }}
+        <span>
+          [{{ movie.original_language }}]
+        </span>
+      </p>
+      <p>
+        [{{ movie.vote_average }}]
+      </p>
+
     </div>
 
     <!-- <img alt="Vue logo" src="./assets/download.png">
@@ -21,7 +41,11 @@
     </div> -->
     
   </div>
+
 </template>
+
+// -----------------------------------------
+// JS
 
 <script>
 import axios from 'axios'
@@ -91,7 +115,13 @@ export default {
 
 </script>
 
+// -----------------------------------------
+// CSS
+
 <style lang="scss">
+
+@import './assets/scss/app.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -100,4 +130,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
 </style>
+
+// -----------------------------------------
