@@ -19,9 +19,9 @@
       </h3>
       <p>
         {{ movie.original_title }}
-        <span>
-          [{{ movie.original_language }}]
-        </span>
+        <img :src="flags[ movie.original_language ]">
+        
+        </img>
       </p>
       <p>
         [{{ movie.vote_average }}]
@@ -56,7 +56,11 @@ export default {
     return {
       search: 'batman',
       movies: [],
-      baseURL: 'https://api.themoviedb.org/3'
+      baseURL: 'https://api.themoviedb.org/3',
+      flags: {
+        en: require('./assets/img/eng.png'),
+        it: require('./assets/img/ita.png')
+      }
     }
   },
 
