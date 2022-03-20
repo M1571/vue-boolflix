@@ -10,24 +10,32 @@
     </header>
 
     <!-- ------------------------------- -->
-    <!-- CARD -->
+    <!-- INIZIO CARD -->
 
-    <div v-for="movie in movies" :key="movie.id">
+  <main>
+    <div class="container movie-grid">
 
-      <h3>
-      {{ movie.title }}
-      </h3>
-      <p>
-        {{ movie.original_title }}
-        <img :src="flags[ movie.original_language ]">
-        
-        </img>
-      </p>
-      <p>
-        [{{ movie.vote_average }}]
-      </p>
+      <div v-for="movie in movies" :key="movie.id">
+
+        <h3>
+        {{ movie.title }}
+        </h3>
+        <p>
+          {{ movie.original_title }}
+          <img v-if="flags[ movie.original_language ]" height="11" width="20" :src="flags[ movie.original_language ]"/>
+          <span v-else>{{ movie.original_language }}</span>
+        </p>
+        <p>
+          [{{ movie.vote_average }}]
+        </p>
+
+      </div>
 
     </div>
+  </main>
+
+    <!-- FINE CARD -->
+    <!-- ------------------------------- -->
 
     <!-- <img alt="Vue logo" src="./assets/download.png">
 
@@ -54,12 +62,18 @@ export default {
   name: 'App',
   data() {
     return {
-      search: 'batman',
+      search: 'taxi',
       movies: [],
       baseURL: 'https://api.themoviedb.org/3',
       flags: {
         en: require('./assets/img/eng.png'),
-        it: require('./assets/img/ita.png')
+        it: require('./assets/img/ita.png'),
+        fr: require('./assets/img/fra.png'),
+        de: require('./assets/img/ger.png'),
+        es: require('./assets/img/spa.png'),
+        ja: require('./assets/img/jam.jpg'),
+        sh: require('./assets/img/sha.png'),
+        hi: require('./assets/img/hil.png')
       }
     }
   },
@@ -134,6 +148,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.movie-grid {
+  // display: grid;
+  // grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+} 
 
 </style>
 
