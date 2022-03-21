@@ -13,9 +13,18 @@
     <!-- INIZIO CARD -->
 
   <main>
-    <div class="container movie-grid">
+
+    <!-- ------------------------------- -->
+    <!-- MOVIE GRID -->
+
+    <h2>Film</h2>
+
+    <div class="container grid movie-grid">
 
       <div v-for="movie in movies" :key="movie.id">
+
+        <img v-if="movie.poster_path" :src="`http://image.tmdb.org/t/p/w342${ movie.poster_path }`" alt="">
+        <img v-else src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
 
         <h3>
         {{ movie.title }}
@@ -25,13 +34,49 @@
           <img v-if="flags[ movie.original_language ]" height="11" width="20" :src="flags[ movie.original_language ]"/>
           <span v-else>{{ movie.original_language }}</span>
         </p>
+        <span v-for="n in 5" :key="n">
+          <i class="fa-star"
+            :class=" n <= movie.vote_average ? 'fa-solid' : 'fa-regular' "
+          ></i>
+          <!-- [{{ movie.vote_average }}] {{ vote }}  -->
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- FINE MOVIE -->
+    <!-- ------------------------------- -->
+    <!-- SERIES GRID -->
+
+    <h2>Serie TV</h2>
+
+    <div class="container grid series-grid">
+
+      <div v-for="serie in series" :key="serie.id">
+
+        <img v-if="tv.poster_path" :src="`http://image.tmdb.org/t/p/w342${ tv.poster_path }`" alt="">
+        <img v-else src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
+
+        <h3>
+        {{ tv.name }}
+        </h3>
         <p>
-          [{{ movie.vote_average }}]
+          {{ serie.original_name }}
+          <img v-if="flags[ tv.original_language ]" height="11" width="20" :src="flags[ tv.original_language ]"/>
+          <span v-else>{{ tv.original_language }}</span>
+        </p>
+        <p>
+          Voto: [{{ tv.vote_average }}] 
         </p>
 
       </div>
 
     </div>
+
+    <!-- FINE SERIES -->
+    <!-- ------------------------------- -->
+
   </main>
 
     <!-- FINE CARD -->
@@ -62,8 +107,9 @@ export default {
   name: 'App',
   data() {
     return {
-      search: 'taxi',
+      search: '',
       movies: [],
+      series: [],
       baseURL: 'https://api.themoviedb.org/3',
       flags: {
         en: require('./assets/img/eng.png'),
@@ -75,6 +121,12 @@ export default {
         sh: require('./assets/img/sha.png'),
         hi: require('./assets/img/hil.png')
       }
+    }
+  },
+
+  computed: {
+    vote: function() {
+      return Math.ceil( this.movies.vote_average / 2)
     }
   },
 
@@ -97,6 +149,7 @@ export default {
       })
 
     }
+
   },
 
   // created() {
@@ -139,6 +192,7 @@ export default {
 <style lang="scss">
 
 @import './assets/scss/app.scss';
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -149,9 +203,9 @@ export default {
   margin-top: 60px;
 }
 
-.movie-grid {
-  // display: grid;
-  // grid-template-columns: repeat(4, 1fr);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 } 
 
