@@ -5,19 +5,20 @@
 
   <div id="app">
 
-    <header>
-      <input type="text" v-model="search" @keyup.enter="fetchData">
+    <header class="header">
+      <h1>BOOLFIX</h1>
+      <input class="in-search" type="text" v-model="search" @keyup.enter="fetchData">
     </header>
 
     <!-- ------------------------------- -->
     <!-- INIZIO CARD -->
 
-  <main>
+  <main class="main">
 
     <!-- ------------------------------- -->
     <!-- MOVIE GRID -->
 
-    <h2>Film</h2>
+    <h2 class="films">FILM</h2>
 
     <div class="container grid movie-grid">
 
@@ -36,7 +37,7 @@
         </p>
         <span v-for="n in 5" :key="n">
           <i class="fa-star"
-            :class=" n <= movie.vote_average ? 'fa-solid' : 'fa-regular' "
+            :class=" n <= movie.vote_average ? 'fa-solid gold' : 'fa-regular gray' "
           ></i>
           <!-- [{{ movie.vote_average }}] {{ vote }}  -->
         </span>
@@ -49,7 +50,7 @@
     <!-- ------------------------------- -->
     <!-- SERIES GRID -->
 
-    <h2>Serie TV</h2>
+    <h2>SERIE TV</h2>
 
     <div class="container grid series-grid">
 
@@ -198,9 +199,47 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+}
+
+.header {
+  // margin-top: 50px;
+  background-color: #000;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  align-content: center;
+  flex-direction: row;
+  // border-bottom-right-radius: 15px;
+  // border-bottom-left-radius: 15px;
+  // border-radius: 15px;
+}
+
+h1 {
+  color: red;
+  align-self: flex-start;
+}
+
+.in-search {
+  max-height: 30px;
+  border-radius: 8px;
+}
+
+.films {
+  margin-top: 30px;
+}
+
+h2 {
+  padding: 20px;
+  color: darkred;
+}
+
+.main {
+  min-height: 100vh;
+  // background-color: #3C3C3C;
+  margin: 20px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 .grid {
@@ -208,6 +247,14 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 } 
+
+.gold {
+  color: gold;
+}
+
+.gray {
+  color: darkgray;
+}
 
 </style>
 
